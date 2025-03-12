@@ -10,27 +10,21 @@
                 // Se houver internet, abre o PDF diretamente
                 window.location.href = "https://drive.google.com/uc?id=1sIbxOsa8EHKd0TigWAth4bwPxCkPO08N";
             } else {
-                // Se não houver internet, exibe a mensagem offline
+                // Se não houver internet, exibe a mensagem offline diretamente no HTML
                 document.getElementById("sms-option").style.display = "block";
-                carregarTextoOffline();
             }
         };
-
-        function carregarTextoOffline() {
-            fetch("informacoes.txt") // Carrega o arquivo TXT localmente no Vercel/GitHub
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById("mensagem").innerText = data;
-                })
-                .catch(error => {
-                    document.getElementById("mensagem").innerText = "Não foi possível carregar as informações offline.";
-                });
-        }
     </script>
 </head>
 <body>
     <div id="sms-option" style="display: none; text-align: center; padding: 20px;">
-        <h2 id="mensagem">Carregando informações...</h2>
+        <h2>Informações Importantes:</h2>
+        <p>
+            WALTER MOURA DOS SANTOS 
+OPER. MULTIFUNCIONAL I 
+NR33 - ESPAÇO CONFINADO - 15/03/2025
+NR 35 - TRABALHO EM ALTURA - 15/03/2026
+        </p>
     </div>
 </body>
 </html>
