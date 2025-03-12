@@ -6,28 +6,31 @@
     <title>Abrir PDF ou Exibir Informações</title>
     <script>
         window.onload = function() {
-            // Testa se há conexão com a internet
             if (navigator.onLine) {
-                // Redireciona para o PDF se houver internet
+                // Se houver internet, abre o PDF diretamente
                 window.location.href = "https://drive.google.com/uc?id=1sIbxOsa8EHKd0TigWAth4bwPxCkPO08N";
             } else {
-                // Se não houver internet, exibe as informações do arquivo TXT
+                // Se não houver internet, exibe a mensagem offline
                 document.getElementById("sms-option").style.display = "block";
-                fetch('https://raw.githubusercontent.com/LeticiaC16/abacate/refs/heads/main/informacoes.txt')
-                    .then(response => response.text())
-                    .then(texto => {
-                        document.getElementById("info-text").innerText = texto;
-                    })
-                    .catch(error => {
-                        document.getElementById("info-text").innerText = "Erro ao carregar informações.";
-                    });
+                carregarTextoOffline();
             }
         };
+
+        function carregarTextoOffline() {
+            fetch("informacoes.txt") // Carrega o arquivo TXT localmente no Vercel/GitHub
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("mensagem").innerText = data;
+                })
+                .catch(error => {
+                    document.getElementById("mensagem").innerText = "Não foi possível carregar as informações offline.";
+                });
+        }
     </script>
 </head>
 <body>
     <div id="sms-option" style="display: none; text-align: center; padding: 20px;">
-        <h2 id="info-text">Carregando informações...</h2>
+        <h2 id="mensagem">Carregando informações...</h2>
     </div>
 </body>
 </html>
