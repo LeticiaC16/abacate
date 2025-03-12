@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abrir PDF ou Exibir Informações</title>
+    <script>
+        function carregarTexto() {
+            fetch("https://raw.githubusercontent.com/LeticiaC16/abacate/refs/heads/main/informacoes.txt") // Substitua pelo link correto do TXT
+                .then(response => response.text())
+                .then(texto => {
+                    document.getElementById("info-text").innerText = texto;
+                    document.getElementById("info-container").style.display = "block";
+                })
+                .catch(error => {
+                    document.getElementById("info-text").innerText = "Erro ao carregar as informações.";
+                    document.getElementById("info-container").style.display = "block";
+                });
+        }
+
+        window.onload = function() {
+            if (navigator.onLine) {
+                window.location.href = "https://drive.google.com/uc?id=1sIbxOsa8EHKd0TigWAth4bwPxCkPO08N";
+            } else {
+                document.getElementById("info-container").style.display = "block";
+                carregarTexto();
+            }
+        };
+    </script>
+</head>
+<body>
+    <div id="info-container" style="display: none; text-align: center; padding: 20px;">
+        <h2>Informações do Documento</h2>
+        <pre id="info-text" style="white-space: pre-wrap; text-align: left;"></pre>
+    </div>
+</body>
+</html>
